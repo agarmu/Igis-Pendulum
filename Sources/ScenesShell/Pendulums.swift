@@ -12,12 +12,13 @@ class Pendulums : RenderableEntity, MouseDownHandler {
         let dx : Int = 10 //canvasSize.width / (xCount + 1)
         let dy : Int = 10 //canvasSize.height / (yCount + 1)
         let length = Double(min(dx, dy)) * 100
+        let destPoint = Point(x: canvasSize.width + Int.random(in: -canvasSize.width/3...canvasSize.width/3), y: canvasSize.height)
         for i in 1...xCount {
             let x = i * dx + canvasSize.width / 2 - xCount / 2 * dx
             for j in 1...yCount {
                 let y = j * dy
                 let p = Pendulum(at: Point(x: x, y: y), length: length)
-                p.point(at: Point(x: canvasSize.width * 5 / 8, y: canvasSize.height))
+                p.point(at: destPoint)
                 pendulums.append(p)
             }
         }
