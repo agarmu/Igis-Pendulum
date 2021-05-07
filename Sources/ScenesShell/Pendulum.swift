@@ -3,8 +3,8 @@ import Scenes
 import Foundation
 
 class Pendulum:  RenderableEntity {
-    static let g : Double = -0.006
-    static let drag : Double = 0.994
+    static let g : Double = -0.03
+    static let drag : Double = 0.98
     let bob = Ellipse(
       center: Point(x: 0, y: 0), radiusX: 10, radiusY: 10, fillMode: .fillAndStroke
     )
@@ -38,8 +38,8 @@ class Pendulum:  RenderableEntity {
     }
     override func calculate(canvasSize: Size) {
         let renderAngle = Double.pi / 2 - angle
-        let deltaX = cos(renderAngle) * length
-        let deltaY = sin(renderAngle) * length
+        let deltaX = cos(renderAngle) * length / 10.0
+        let deltaY = sin(renderAngle) * length / 10.0
         bob.center = Point(x: location.x + Int(deltaX), y: location.y + Int(deltaY))
         string = Lines(from: location, to: bob.center)
         angularVelocity += angularAcceleration
@@ -47,7 +47,7 @@ class Pendulum:  RenderableEntity {
         angularVelocity *= Pendulum.drag
     }
     override func render(canvas: Canvas) {
-        // canvas.render(stringStrokeStyle, stringLineWidth, string)
-        canvas.render(bobStrokeStyle, bobFillStyle, bobLineWidth, bob)
+        canvas.render(stringStrokeStyle, stringLineWidth, string)
+    //    canvas.render(bobStrokeStyle, bobFillStyle, bobLineWidth, bob)
     }
 }

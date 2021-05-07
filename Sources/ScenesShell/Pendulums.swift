@@ -2,16 +2,16 @@ import Igis
 import Scenes
 
 class Pendulums : RenderableEntity, MouseDownHandler {
-    let xCount: Int = 15
-    let yCount : Int = 10
+    let xCount: Int = 30
+    let yCount : Int = 15
     var pendulums : [Pendulum] = []
     init() {
         super.init(name: "Pendulums")
     }
     override func setup(canvasSize: Size, canvas: Canvas) {
-        let dx : Int = 10 //canvasSize.width / (xCount + 1)
-        let dy : Int = 10 //canvasSize.height / (yCount + 1)
-        let length = Double(min(dx, dy)) * 100
+        let dx : Int = canvasSize.width / (xCount + 1)
+        let dy : Int = canvasSize.height / (yCount + 1)
+        let length = min(Double(min(dx, dy)) * 500, 1000)
         let destPoint = Point(x: canvasSize.width + Int.random(in: -canvasSize.width/3...canvasSize.width/3), y: canvasSize.height)
         for i in 1...xCount {
             let x = i * dx + canvasSize.width / 2 - xCount / 2 * dx
